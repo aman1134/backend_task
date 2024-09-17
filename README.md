@@ -26,3 +26,5 @@ and running before, or the command will fail) in root folder.
 
 We recommend that you always use the PHP container's shell whenever you execute PHP, such as when installing and 
 requiring new composer dependencies.
+
+Postman Collection link: https://speeding-trinity-190172.postman.co/workspace/92ca66d7-fa22-480c-869c-577ab34e87c5/collection/23170706-a7a39a2f-06d0-4934-a019-d602b4068dd9/overview?action=share&creator=23170706&active-environment=23170706-1db2e77d-dbc3-408a-b540-0fe3f3cc5cef&action_performed=login&action_performed=google_login&workspaceOnboarding=show
