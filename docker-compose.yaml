@@ -1,17 +1,5 @@
 version: '3.3'
 
-volumes:
-    database_data:
-        driver: local
-    database_data_new:
-        driver: local
-    rabbitmqetc:
-        driver: local
-    rabbitmqdata:
-        driver: local
-    rabbitmqlogs:
-        driver: local
-
 networks:
     default:
         external:
@@ -36,9 +24,12 @@ services:
         ports:
             - "3307:3306"
         volumes:
-            - database_data_new:/var/lib/mysql
+            - backend_task_database_data_new:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: docker
+            MYSQL_DATABASE: debricked
+            MYSQL_USER: aman
+            MYSQL_PASSWORD: aman
         restart: on-failure
         networks:
             - backend
@@ -50,9 +41,9 @@ services:
             RABBITMQ_DEFAULT_USER: rabbit
             RABBITMQ_DEFAULT_PASS: docker
         volumes:
-            - rabbitmqetc:/etc/rabbitmq/
-            - rabbitmqdata:/var/lib/rabbitmq/
-            - rabbitmqlogs:/var/log/rabbitmq/
+            - backend_task_rabbitmqetc:/etc/rabbitmq/
+            - backend_task_rabbitmqdata:/var/lib/rabbitmq/
+            - backend_task_rabbitmqlogs:/var/log/rabbitmq/
         networks:
             - backend
         restart: on-failure
@@ -73,6 +64,10 @@ services:
             REDIS_HOST: redis
             REDIS_PORT: 6379
             IN_DOCKER: "true"
+            DB_HOST: db
+            DB_USER: aman
+            DB_PASSWORD: aman
+            DB_NAME: debricked
         expose:
             - 9000
             - 9001
@@ -87,7 +82,7 @@ services:
         entrypoint:
             - /bin/sh
             - -c
-            - ip -4 route list match 0/0 | awk '{print $$3" host.docker.internal"}' >> /etc/hosts && php-fpm --allow-to-run-as-root
+            - ip -4 route list match 0/0 | awk '{print $$3" host.docker.internal"}' >> /etc/hosts && /usr/local/bin/docker-entrypoint.sh
         restart: on-failure
         tty: true
         user: root
@@ -121,3 +116,14 @@ services:
             - backend
             - frontend
 
+volumes:
+    backend_task_database_data:
+        driver: local
+    backend_task_database_data_new:
+        driver: local
+    backend_task_rabbitmqetc:
+        driver: local
+    backend_task_rabbitmqdata:
+        driver: local
+    backend_task_rabbitmqlogs:
+        driver: local
