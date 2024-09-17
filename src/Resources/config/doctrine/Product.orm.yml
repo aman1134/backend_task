@@ -1,0 +1,22 @@
+App\Entity\Product:
+  type: entity
+  table: product
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  fields:
+    name:
+      type: string
+      length: 50
+
+    release:
+      type: string
+      length: 10
+
+  oneToMany:
+    documents:
+      targetEntity: App\Entity\Document
+      mappedBy: document

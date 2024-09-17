@@ -1,0 +1,24 @@
+App\Entity\Scan:
+  type: entity
+  table: scan
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  fields:
+    progress:
+      type: integer
+
+    date:
+      type: date
+
+
+  manyToOne:
+    document:
+      targetEntity: App\Entity\Document
+      joinColumn:
+        name: document_id
+        referenceColumnName: id
+        onDelete: SET NULL

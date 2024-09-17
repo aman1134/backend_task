@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    documents_directory: '%kernel.project_dir%/public/uploads/documents'
 
 services:
     # default configuration for services in *this* file
@@ -13,6 +14,12 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
+
+    App\Service\DebrickedApiService:
+        arguments:
+            $apiUrl: "https://debricked.com"
+            $bearerToken: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjY1NTc2ODQsImV4cCI6MTcyNjU2MTI4NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYW1hbi5yYXN0b2dpLjIzMTJAZ21haWwuY29tIn0.kWJH0LXSlJetzgsojh0Dp-VBojdaeE0I4jHbR7LsL49x5psg2zUL2TPtnkMwR39DEgpZtG_vduqJNPFZR_rQ3zJvpd6WOOEOG2-VOWttAZK_5i1drRNPc3e58RtU11KJtekIh3y1Ouy2Mo6LTBETSiMJY61vb-Qn8dAuTFO0XwpmQ-MciGs6_XVPk3VNx-1VMHQM5RCpMoYPkPbZAMdWeDYJ2PILItiOHmDJbujZuiZJp4Yk3Gcb6U9s3BoUbrZX4NtA1Ad-L2jDsZJOkllOywf3j6xMKNTm8lfpPwuhkavOG8ELvQ6Y-adsyofO9JxjY-W5d8NW9gjutqMir6aeDxQ-vh1P6iU4sSC0xFoLn23O7clbUIa_7XaSW4ofPtxb6ovX0GtTiQsiu1n5wDUEAJksh6FQKoj2nKFLWmV2xsa1d10IJ7gayZOI01lP5czUc_BzPEgI7XK5MkM7QZ9ktLhDzt9kFCiXD2lDKOb6RRUozjWKKSAiEMjv1R-1jkEi9F1NREirtn-384zxa_amlz5HxaPfmhUFu1tzVUVkrS2wTSralWrJ1cP-OdhGomvWsxA68txskEbf4y4JvSWsVsmJikWC03rStJLuhNyXigpYpYyM_y9go33OQeVQg3bOxkjQGuf0EmwXNsxTubdLgZ1ajLhdaZ2QKqpY_edEc6g'
+
     App\:
         resource: '../src/'
         exclude:

@@ -1,0 +1,31 @@
+App\Entity\Document:
+  type: entity
+  table: document
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  fields:
+    name:
+      type: string
+      length: 20
+
+    fileName:
+      type: string
+      length: 20
+
+
+  manyToOne:
+    product:
+      targetEntity: App\Entity\Product
+      joinColumn:
+        name: product_id
+        referenceColumnName: id
+        onDelete: SET NULL
+
+  oneToMany:
+    scans:
+      targetEntity: App\Entity\Scan
+      mappedBy: scan

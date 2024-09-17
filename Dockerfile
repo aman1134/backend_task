@@ -19,6 +19,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install intl \
     && docker-php-ext-install pdo pdo_mysql zip
 
+RUN apt-get update && apt-get install -y default-mysql-client
+
 # Set working directory
 WORKDIR /var/www/html
 
@@ -34,15 +36,28 @@ RUN composer install --no-autoloader --no-scripts
 # Copy the application files
 COPY . .
 
+RUN php bin/console cache:clear
+
 # Install PHP autoload files
 RUN composer dump-autoload --optimize
 
-RUN php bin/console make:migration
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-RUN bin/console doctrine:migrations:migrate
 
 # Expose port 9000
 EXPOSE 9000
 
+ENV PASSPHRASE="thisisthepassphrase"
+
+RUN mkdir -p config/jwt
+
+RUN echo "$PASSPHRASE" | openssl genpkey -algorithm RSA -out config/jwt/private.pem -aes256 -pass stdin
+
+RUN echo "$PASSPHRASE" | openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem -passin stdin
+
+php bin/console messenger:consume async --time-limit=3600
+
 # Start the PHP FastCGI Process Manager
-CMD ["php-fpm"]
+CMD ["php-fpm", "--allow-to-run-as-root"]

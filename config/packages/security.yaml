@@ -1,0 +1,19 @@
+security:
+  providers:
+    # Define a user provider here, adjust as needed for your application
+    app_user_provider:
+      entity:
+        class: App\Entity\User
+        property: email
+  firewalls:
+    api:
+      pattern: ^/api/
+      stateless: true
+      jwt: ~
+      # Optional: add a custom authenticator if needed
+      # authenticator: App\Security\JwtAuthenticator
+
+  access_control:
+    - { path: ^/register/user, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }

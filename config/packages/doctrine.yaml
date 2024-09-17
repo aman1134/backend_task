@@ -1,0 +1,21 @@
+doctrine:
+  dbal:
+    default_connection: default
+    connections:
+      default:
+        url: '%env(resolve:DATABASE_URL)%'
+      dbname:
+        default_dbname: "debricked"
+      user:
+        user: "aman"
+      password:
+        password: "aman"
+
+  orm:
+    mappings:
+      App:
+        is_bundle: false
+        type: annotation
+        dir: '%kernel.project_dir%/src/Entity'
+        prefix: 'App\Entity'
+        alias: App

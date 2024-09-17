@@ -13,10 +13,25 @@
         "symfony/framework-bundle": "6.1.*",
         "symfony/http-client": "6.1.*",
         "symfony/messenger": "6.1.*",
+        "symfony/mailer": "6.1.*",
         "symfony/notifier": "6.1.*",
         "symfony/runtime": "6.1.*",
+        "symfony/validator": "6.1.*",
+        "symfony/security-core": "6.1.*",
         "symfony/slack-notifier": "6.1.*",
-        "symfony/yaml": "6.1.*"
+        "symfony/yaml": "6.1.*",
+        "doctrine/doctrine-bundle": "^2.0",
+        "symfony/form": "6.*",
+        "doctrine/doctrine-migrations-bundle": "^3.2.4",
+        "lexik/jwt-authentication-bundle": "^2.14",
+        "doctrine/annotations": "^1.13",
+        "doctrine/dbal": "^3.3",
+        "doctrine/orm": "^2.14",
+        "symfony/doctrine-bridge": "^6.0",
+        "twig/twig": "^3.4",
+        "symfony/twig-bundle": "^6.1",
+        "symfony/amqp-messenger": "6.1.*",
+        "symfony/http-client": "6.1.*"
     },
     "config": {
         "allow-plugins": {
@@ -71,6 +86,9 @@
         }
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^6.1"
+        "symfony/phpunit-bridge": "^6.1",
+        "symfony/maker-bundle": "^1.36",
+        "doctrine/doctrine-fixtures-bundle": "^3.6",
+        "doctrine/migrations": "^3.5"
     }
 }
