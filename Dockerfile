@@ -13,7 +13,12 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libzip-dev \
     unzip \
-    git \
+    git \    
+    librabbitmq-dev \
+    libssl-dev \
+    && docker-php-ext-install sockets \
+    && pecl install amqp \
+    && docker-php-ext-enable amqp \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd \
     && docker-php-ext-install intl \
@@ -36,19 +41,6 @@ RUN composer install --no-autoloader --no-scripts
 # Copy the application files
 COPY . .
 
-RUN php bin/console cache:clear
-
-# Install PHP autoload files
-RUN composer dump-autoload --optimize
-
-# Copy entrypoint script
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
-
-# Expose port 9000
-EXPOSE 9000
-
 ENV PASSPHRASE="thisisthepassphrase"
 
 RUN mkdir -p config/jwt
@@ -57,7 +49,13 @@ RUN echo "$PASSPHRASE" | openssl genpkey -algorithm RSA -out config/jwt/private.
 
 RUN echo "$PASSPHRASE" | openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem -passin stdin
 
-php bin/console messenger:consume async --time-limit=3600
+RUN php bin/console cache:clear
+
+# Install PHP autoload files
+RUN composer dump-autoload --optimize
+
+# Expose port 9000
+EXPOSE 9000
 
 # Start the PHP FastCGI Process Manager
-CMD ["php-fpm", "--allow-to-run-as-root"]
+CMD ["php-fpm"]

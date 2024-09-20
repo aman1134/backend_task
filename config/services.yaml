@@ -15,17 +15,19 @@ services:
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
 
+    App\:
+       resource: '../src/'
+       exclude:
+           - '../src/DependencyInjection/'
+           - '../src/Entity/'
+           - '../src/Kernel.php'
+
+
     App\Service\DebrickedApiService:
         arguments:
             $apiUrl: "https://debricked.com"
-            $bearerToken: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjY1NTc2ODQsImV4cCI6MTcyNjU2MTI4NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYW1hbi5yYXN0b2dpLjIzMTJAZ21haWwuY29tIn0.kWJH0LXSlJetzgsojh0Dp-VBojdaeE0I4jHbR7LsL49x5psg2zUL2TPtnkMwR39DEgpZtG_vduqJNPFZR_rQ3zJvpd6WOOEOG2-VOWttAZK_5i1drRNPc3e58RtU11KJtekIh3y1Ouy2Mo6LTBETSiMJY61vb-Qn8dAuTFO0XwpmQ-MciGs6_XVPk3VNx-1VMHQM5RCpMoYPkPbZAMdWeDYJ2PILItiOHmDJbujZuiZJp4Yk3Gcb6U9s3BoUbrZX4NtA1Ad-L2jDsZJOkllOywf3j6xMKNTm8lfpPwuhkavOG8ELvQ6Y-adsyofO9JxjY-W5d8NW9gjutqMir6aeDxQ-vh1P6iU4sSC0xFoLn23O7clbUIa_7XaSW4ofPtxb6ovX0GtTiQsiu1n5wDUEAJksh6FQKoj2nKFLWmV2xsa1d10IJ7gayZOI01lP5czUc_BzPEgI7XK5MkM7QZ9ktLhDzt9kFCiXD2lDKOb6RRUozjWKKSAiEMjv1R-1jkEi9F1NREirtn-384zxa_amlz5HxaPfmhUFu1tzVUVkrS2wTSralWrJ1cP-OdhGomvWsxA68txskEbf4y4JvSWsVsmJikWC03rStJLuhNyXigpYpYyM_y9go33OQeVQg3bOxkjQGuf0EmwXNsxTubdLgZ1ajLhdaZ2QKqpY_edEc6g'
-
-    App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
+            $bearerToken: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJpYXQiOjE3MjY4MDEwOTQsImV4cCI6MTcyNjgwNDY5NCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9DT01QQU5ZX0FETUlOIiwiUk9MRV9SRVBPU0lUT1JZX0FETUlOIl0sImVtYWlsIjoiYW1hbi5yYXN0b2dpLjIzMTJAZ21haWwuY29tIn0.HoslYqdqfcD8r9LrZ-YNOGYheXhyDiDOuwCMpO-ztY06mfhg8nTniWwjUKY7d89OB1lz8vdJdUClwr1KVs8ez9KivVmkHKoKN71OMXSYaPumHI6eYkwqDDwlFrBS2ZVCfyS2qjcPkyEgokjCM9FnACg7zukLzVjZvGGxKMjkXnnVolMpQSlHeOp-tlqKyIi1pRcuwPT2Oz8p1aLC3-z3lgoAD7AgfR3ssUoJUDik2WCiMBoW4tSne4x1JFCec72aHtZwRU-d9ljz328ALDxRDibrbZHBQBd6m1PHP2V_hYOVgEhrNK4APx1hMUgJHAUnhGWAs4zF6DdEXdwWs4PhcijOyTxVVNuqM-0Me27bapxtJAa_chJiH0nykKCWO-o6d_Q4lffd88x4TmbjBqtZVU4z9E6b-G8wesdN6oklsP9pcYeX-R9mZXxl1P_OllM2YaXPybxgdY30d9zYNcTiHfH6SOkIxLg9PgZHHLHaeVgbu-2JJB4KgaqYZnvmLRIKrU5beib9rE9mx8QkV0xKyh6Tts1X5rlhRHP6K-M8rFO47PZmnNY1PBh8HVNDQbmcCKcntG9apn_dqJsOSQtgKlRefy_ZWkGtqBZIPX6jUE4AAqgohZFe2Qtv_9NXdRHzhtJkVfiJkOdAuZeOTJvIzEKmbT_w-5ndbUPLxSPXbYE'
+            $documentsDirectory: '%documents_directory%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

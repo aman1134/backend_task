@@ -18,16 +18,18 @@ class UserController extends AbstractController
 {
 
     private $entityManager;
+    private $validator;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, ValidatorInterface $validator)
     {
-        $this->entityManager = $entityManager;
+        $this->entityManager = $entityManager; 
+        $this->validator = $validator;
     }
 
     /**
      * @Route("/register/user", name="register_user", methods={"POST"})
      */
-    public function register(Request $request, ValidatorInterface $validator): JsonResponse
+    public function register(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
@@ -40,7 +42,7 @@ class UserController extends AbstractController
         $user->setPassword(password_hash($data['password'], PASSWORD_BCRYPT)); // Update this line
 
         // Validate user data
-        $errors = $validator->validate($user);
+        $errors = $this->validator->validate($user);
 
         if (count($errors) > 0) {
             return new JsonResponse(['errors' => (string) $errors], Response::HTTP_BAD_REQUEST);
