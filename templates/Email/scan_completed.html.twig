@@ -5,12 +5,12 @@
     <title>File Scan is Completed</title>
 </head>
 <body>
-<h1>File scan is Completed for {{ productName }} ({{ release }})!</h1>
-{% if files is not empty %}
-    <h2>Scanned Files are having {{ count }} vulnerabilities :</h2>
+<h1>{{ productName }} ({{ release }}) : File scan is Completed for {{ file }} !</h1>
+{% if cve is not empty %}
+    <h2>Scanned File is having {{ count }} vulnerabilities :</h2>
     <ul>
-        {% for file in files %}
-            <li>{{ file }}</li>
+        {% for c in cve %}
+            <li>{{ cve['dependency'] }} : <a href="{{ cve['link'] }}">  </a> {{ cve['id'] }}</li>
         {% endfor %}
     </ul>
 {% else %}

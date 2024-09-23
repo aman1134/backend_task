@@ -4,14 +4,17 @@ framework:
         # failure_transport: failed
 
         transports:
-            # https://symfony.com/doc/current/messenger.html#transport-configuration
-            async: '%env(MESSENGER_TRANSPORT_DSN)%'
-            # failed: 'doctrine://default?queue_name=failed'
-#             sync: '%env(MAILER_DSN)%'
+            email: '%env(MESSENGER_TRANSPORT_DSN_EMAIL)%'
+            upload: '%env(MESSENGER_TRANSPORT_DSN_UPLOAD)%'
+            scan: '%env(MESSENGER_TRANSPORT_DSN_SCAN)%'
+            status: '%env(MESSENGER_TRANSPORT_DSN_STATUS)%'
 
         routing:
             # Route your messages to the transports
-            'Symfony\Component\Mailer\Messenger\SendEmailMessage': async
+            'Symfony\Component\Mailer\Messenger\SendEmailMessage': email
+            'App\Message\UploadAPIMessage' : upload
+            'App\Message\ScanApiMessage' : scan
+            'App\Message\StatusAPIMessage' : status
 
 # when@test:
 #    framework:

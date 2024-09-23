@@ -30,7 +30,7 @@
         "symfony/doctrine-bridge": "^6.0",
         "twig/twig": "^3.4",
         "symfony/twig-bundle": "^6.1",
-        "symfony/amqp-messenger": "6.1.*",
+        "symfony/amqp-messenger": "6.4.*",
         "symfony/http-client": "6.1.*"
     },
     "config": {

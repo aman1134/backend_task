@@ -5,16 +5,6 @@
     <title>File Scan is In Progress</title>
 </head>
 <body>
-<h1>File scan is In Progress for {{ productName }} ({{ release }})!</h1>
-{% if files is not empty %}
-    <h2>Scanning Files:</h2>
-    <ul>
-        {% for file in files %}
-            <li>{{ file }}</li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No files are scanned.</p>
-{% endif %}
+<h1>{{ productName }} ({{ release }}) : File scan is In Progress for {{ file }} !!</h1>
 </body>
 </html>

@@ -7,6 +7,8 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Twig\Environment;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\Stamp\AmqpStamp;
 
 class EmailService
 {
@@ -30,6 +32,7 @@ class EmailService
             ->subject($subject)
             ->text($content);
 
-        $this->bus->dispatch(new SendEmailMessage($email));
+        $message = new SendEmailMessage($email);
+        $this->bus->dispatch( $message );
     }
 }

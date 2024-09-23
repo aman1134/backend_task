@@ -183,7 +183,6 @@
       <path value="$PROJECT_DIR$/backend_task/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/backend_task/vendor/symfony/var-exporter" />
       <path value="$PROJECT_DIR$/backend_task/vendor/symfony/yaml" />
-      <path value="$PROJECT_DIR$/vendor/stella-maris/clock" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
